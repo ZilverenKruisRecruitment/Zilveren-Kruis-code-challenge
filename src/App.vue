@@ -221,12 +221,22 @@
                     <h2>Gegevens</h2>
                     <div class="form-group">
                         <h3>Reden van aanmelding</h3>
+
                         <div class="form-input my-4">
-                            <label id="aanmeldreden-label" class="input__title">
+                            <label
+                                for="aanmeldreden"
+                                id="aanmeldreden-label"
+                                class="input__title"
+                            >
                                 Wat is de reden van uw aanvraag?
                             </label>
                             <div class="input__group">
-                                <select class="form-control">
+                                <select
+                                    id="aanmeldreden"
+                                    class="form-control"
+                                    v-model="formValues.aanmeldreden"
+                                    required
+                                >
                                     <option>
                                         Nieuwe werkgever met collectiviteit bij
                                         Zilveren Kruis
@@ -240,33 +250,49 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h3>Persoonlijke gegevensss</h3>
+                        <h3>Persoonlijke gegevens</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">Naam</label>
+                                <label for="voornaam" class="input__title"
+                                    >Naam</label
+                                >
                                 <input
+                                    id="voornaam"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="formValues.voornaam"
+                                    required
                                 />
                             </div>
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label
+                                    for="tussenvoegsels"
+                                    class="input__title"
+                                >
                                     Tussenvoegsels
                                 </label>
                                 <input
+                                    id="tussenvoegsels"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="formValues.tussenvoegsels"
+                                    optional
                                 />
                             </div>
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">Achternaam</label>
+                                <label for="achternaam" class="input__title"
+                                    >Achternaam</label
+                                >
                                 <input
+                                    id="achternaam"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="formValues.achternaam"
+                                    required
                                 />
                             </div>
                         </div>
@@ -279,9 +305,12 @@
                                     >
                                         <input
                                             id="man"
+                                            value="man"
                                             class="radio__input custom-control-input"
                                             type="radio"
                                             name="geslacht"
+                                            v-model="formValues.geslacht"
+                                            required
                                         />
                                         <label
                                             class="radio__label custom-control-label"
@@ -295,9 +324,12 @@
                                     >
                                         <input
                                             id="vrouw"
+                                            value="vrouw"
                                             class="radio__input custom-control-input"
                                             type="radio"
                                             name="geslacht"
+                                            v-model="formValues.geslacht"
+                                            required
                                         />
                                         <label
                                             class="radio__label custom-control-label"
@@ -316,7 +348,9 @@
                                 </label>
                                 <input
                                     class="input__field form-control"
-                                    type="text"
+                                    type="date"
+                                    v-model="formValues.geboortedatum"
+                                    required
                                 />
                             </div>
                         </div>
@@ -327,7 +361,10 @@
                                 </label>
                                 <input
                                     class="input__field form-control is-invalid"
-                                    type="text"
+                                    type="number"
+                                    v-model="formValues.bsn"
+                                    maxlength="9"
+                                    required
                                 />
                             </div>
                             <div
@@ -352,8 +389,16 @@
                             geaccepteerd. De overheid bepaalt welke zorg hierin
                             zit en dit is dus bij elke verzekeraar hetzelfde.
                         </p>
+
+                        <div>
+                            <pre>
+                            {{ JSON.stringify(formValues, null, 2) }}
+                        </pre
+                            >
+                        </div>
+
                         <div class="input__group">
-                            <label class="input__title">
+                            <label for="basisverzekering" class="input__title">
                                 Kies uw basisverzekering
                             </label>
                             <div class="form-row">
@@ -362,11 +407,15 @@
                                         class="radio custom-radio radio__option"
                                     >
                                         <input
+                                            for="basisverzekering"
                                             value="Basis Budget"
                                             type="radio"
                                             name="radio-insurance"
                                             id="radio-insurance-basis-budget"
                                             class="radio__input custom-control-input"
+                                            v-model="
+                                                formValues.basisverzekering
+                                            "
                                         />
                                         <label
                                             for="radio-insurance-basis-budget"
@@ -389,11 +438,15 @@
                                         class="radio custom-radio radio__option"
                                     >
                                         <input
+                                            for="basisverzekering"
                                             value="Basis Zeker"
                                             type="radio"
                                             name="radio-insurance"
                                             id="radio-insurance-basis-zeker"
                                             class="radio__input custom-control-input"
+                                            v-model="
+                                                formValues.basisverzekering
+                                            "
                                         />
                                         <label
                                             for="radio-insurance-basis-zeker"
@@ -413,11 +466,15 @@
                                         class="radio custom-radio radio__option"
                                     >
                                         <input
+                                            for="basisverzekering"
                                             value="Basis Exclusief (Restitutie)"
                                             type="radio"
                                             name="radio-insurance"
                                             id="radio-insurance-basis-exclusief-(restitutie)"
                                             class="radio__input custom-control-input"
+                                            v-model="
+                                                formValues.basisverzekering
+                                            "
                                         />
                                         <label
                                             for="radio-insurance-basis-exclusief-(restitutie)"
@@ -438,10 +495,14 @@
                     <div class="form-group">
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="betaaltermijn" class="input__title">
                                     Kies je betaaltermijn
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="betaaltermijn"
+                                    class="form-control"
+                                    v-model="formValues.betaaltermijn"
+                                >
                                     <option>per maand</option>
                                     <option>per kwartaal</option>
                                     <option selected>per jaar</option>
@@ -453,10 +514,14 @@
                         <h3>Eigen risico</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="eigenRisico" class="input__title">
                                     Kies de hoogste van het eigen risico
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="eigenRisico"
+                                    class="form-control"
+                                    v-model="formValues.eigenRisico"
+                                >
                                     <option>
                                         € 385 - verplicht eigen risico
                                     </option>
@@ -477,10 +542,17 @@
                         </p>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label
+                                    for="aanvullendeVerzekering"
+                                    class="input__title"
+                                >
                                     Kies uw aanvullende verzekering
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="aanvullendeVerzekering"
+                                    class="form-control"
+                                    v-model="formValues.aanvullendeVerzekering"
+                                >
                                     <option selected>
                                         Geen aanvullende verzekering
                                         geselecteerd
@@ -504,10 +576,17 @@
                     <div class="form-group">
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label
+                                    for="tandartsverzekering"
+                                    class="input__title"
+                                >
                                     Kies uw tandartsverzekering
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="tandartsverzekering"
+                                    class="form-control"
+                                    v-model="formValues.tandartsverzekering"
+                                >
                                     <option selected>
                                         Geen tandartsverzekering geselecteerd
                                     </option>
@@ -670,7 +749,25 @@
 
 <script>
 export default {
-    name: 'App'
+    name: "App",
+    data() {
+        return {
+            formValues: {
+                aanmeldreden: "",
+                voornaam: "",
+                tussenvoegsels: "",
+                achternaam: "",
+                geslacht: "",
+                geboortedatum: "",
+                bsn: "",
+                basisverzekering: "",
+                betaaltermijn: "",
+                eigenRisico: "",
+                aanvullendeVerzekering: "",
+                tandartsverzekering: ""
+            }
+        };
+    }
 };
 </script>
 
