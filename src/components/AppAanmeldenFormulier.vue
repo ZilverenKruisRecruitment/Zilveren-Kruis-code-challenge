@@ -1,5 +1,6 @@
 <script>
 // import { ValidationProvider } from "vee-validate";
+import moment from "moment";
 
 export default {
     data() {
@@ -19,6 +20,11 @@ export default {
                 tandartsverzekering: ""
             }
         };
+    },
+    filters: {
+        moment: function (date) {
+            return moment(date).format("LL");
+        }
     }
 };
 </script>
@@ -53,7 +59,6 @@ export default {
                                 id="aanmeldreden"
                                 class="form-control"
                                 v-model="formValues.aanmeldreden"
-                                required
                             >
                                 <option>
                                     Nieuwe werkgever met collectiviteit bij
@@ -78,7 +83,6 @@ export default {
                                 class="input__field form-control"
                                 type="text"
                                 v-model="formValues.voornaam"
-                                required
                             />
                         </div>
                     </div>
@@ -106,7 +110,6 @@ export default {
                                 class="input__field form-control"
                                 type="text"
                                 v-model="formValues.achternaam"
-                                required
                             />
                         </div>
                     </div>
@@ -122,7 +125,6 @@ export default {
                                         type="radio"
                                         name="geslacht"
                                         v-model="formValues.geslacht"
-                                        required
                                     />
                                     <label
                                         class="radio__label custom-control-label"
@@ -139,7 +141,6 @@ export default {
                                         type="radio"
                                         name="geslacht"
                                         v-model="formValues.geslacht"
-                                        required
                                     />
                                     <label
                                         class="radio__label custom-control-label"
@@ -158,7 +159,7 @@ export default {
                                 class="input__field form-control"
                                 type="date"
                                 v-model="formValues.geboortedatum"
-                                required
+                                pattern="\d{4}-\d{2}-\d{2}"
                             />
                         </div>
                     </div>
@@ -428,7 +429,7 @@ export default {
                         </p>
                         <p>
                             <strong>Geboortedatum:&nbsp;</strong
-                            >{{ formValues.geboortedatum }}
+                            >{{ formValues.geboortedatum | moment }}
                         </p>
                         <p><strong>BSN:&nbsp;</strong>{{ formValues.bsn }}</p>
                     </div>
