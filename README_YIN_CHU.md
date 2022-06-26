@@ -19,9 +19,9 @@ In deze README leg ik kort uit welke stappen ik heb doorlopen om deze opdracht (
 -   Conditionally render tussenvoegsels én de spatie daarnaast (nu staan er twee spaties). Met React zou ik het zo aanpakken (met benaming zoals in deze Vue app voor extra duidelijkheid):
 
 ```js
-{tussenvoegsels.length > 0 && <span>{tussenvoegsels&nbsp;}</span>
+{tussenvoegsels.length > 0 && <span>{tussenvoegsels&nbsp;}</span>}
 
-// tussenvoegsels derived from state
+// tussenvoegsels derived from state (object)
 ```
 
 -   Informatie op het einde pas weergeven als alles is ingevuld. Met React zou ik het zo aanpakken:
@@ -53,5 +53,5 @@ const [bsn, setBsn] = React.useState(0)
 ## Opmerking
 
 -   Ik heb geen Routes opgezet omdat ik hier (ook) geen tijd voor had. Ik kan met redelijke zekerheid zeggen dat dit mij prima zou zijn gelukt, aangezien routing niet dermate lastig(er) kan zijn zoals in React met bijv. React Router
--   Ik heb mij echt proberen te houden aan de max. 4 uur, zie: https://imgur.com/a/eb20Ute
--   Ik heb (nog) geen tests geschreven omdat ik dit nog nooit heb gedaan
+-   Ik heb mij echt proberen te houden aan de max. van 4 uur, zie: https://imgur.com/a/eb20Ute
+-   Ik heb (nog) geen tests geschreven omdat ik dit nog nooit heb gedaan en dit dus ook nog niet kan.
