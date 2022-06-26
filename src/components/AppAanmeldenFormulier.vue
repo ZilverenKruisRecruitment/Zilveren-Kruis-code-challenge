@@ -1,4 +1,6 @@
 <script>
+// import { ValidationProvider } from "vee-validate";
+
 export default {
     data() {
         return {
@@ -378,12 +380,58 @@ export default {
                 <h2 class="mt-5">Controleren</h2>
                 <div class="form-group">
                     <h3>Gekozen pakket</h3>
+                    <div>
+                        <p>
+                            <strong>Uw basisverzekering:&nbsp;</strong
+                            >{{ formValues.basisverzekering }}
+                        </p>
+                        <p>
+                            <strong>Uw eigen risico:&nbsp;</strong
+                            >{{ formValues.eigenRisico }}
+                        </p>
+                        <p>
+                            <strong>Uw aanvullende verzekering:&nbsp;</strong
+                            >{{ formValues.aanvullendeVerzekering }}
+                        </p>
+                        <p>
+                            <strong>Uw tandverzekering:&nbsp;</strong
+                            >{{ formValues.tandartsverzekering }}
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <h3>Totaalpremie</h3>
+
+                    <div>
+                        <p>
+                            <strong>Uw betaaltermijn:&nbsp;</strong
+                            >{{ formValues.betaaltermijn }}
+                        </p>
+                        <p>
+                            <strong>Uw totaalpremie:&nbsp;</strong
+                            >{{ formValues.basisverzekering }}
+                        </p>
+                    </div>
                 </div>
                 <div class="form-group">
                     <h3>Adres en contactgegevens</h3>
+                    <div>
+                        <p>
+                            <strong>Voor- en achternaam:&nbsp;</strong
+                            >{{ formValues.voornaam }}&nbsp;{{
+                                formValues.tussenvoegsels
+                            }}&nbsp;{{ formValues.achternaam }}
+                        </p>
+                        <p>
+                            <strong>Geslacht:&nbsp;</strong
+                            >{{ formValues.geslacht }}
+                        </p>
+                        <p>
+                            <strong>Geboortedatum:&nbsp;</strong
+                            >{{ formValues.geboortedatum }}
+                        </p>
+                        <p><strong>BSN:&nbsp;</strong>{{ formValues.bsn }}</p>
+                    </div>
                 </div>
             </div>
             <div class="col-4">
