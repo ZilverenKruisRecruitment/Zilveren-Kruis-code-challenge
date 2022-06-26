@@ -11,7 +11,8 @@ In deze README leg ik kort uit welke stappen ik heb doorlopen om deze opdracht (
 -   Gelezen hoe folder structuur precies werkt in Vue.js, inclusief naming convention.
 -   Begonnen met het creëren van een component voor de Header en de Footer. (Opmerking: jullie footer was in eerste instatie een `div` + een `footer` tag. In de desbetreffende component heb ik één `footer` tag geplaatst onder de `template` tag en de bestaande `footer` tag veranderd in een `div` tag. (Deed ik dat niet, dan kreeg ik de error "template should contain exactly one root element").
 -   Een derde component aangemaakt voor het aanmeldformulier. Nogmaals getest of de ingevulde gegevens worden opgeslagen in state.
--   VeeValidate toegevoegd ((nog) niet gebruikt))
+-   VeeValidate toegevoegd ((nog) niet gebruikt)).
+-   Moment.js gebruikt om de datum correct(er) weer te geven.
 
 ## Uitdagingen (niet gelukt)
 
