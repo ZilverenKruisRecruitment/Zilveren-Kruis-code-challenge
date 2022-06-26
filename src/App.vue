@@ -240,7 +240,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h3>Persoonlijke gegevens</h3>
+                        <h3>Persoonlijke gegevensss</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
                                 <label class="input__title">Naam</label>
