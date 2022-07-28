@@ -19,6 +19,9 @@
         </div>
         <div class="form-group">
             <h3>Totaalpremie</h3>
+            <!-- Ik had eigenlijk ook nog iets willen implementeren dat de gebruiker ook ziet wat hij/zij per maand en kwartaal kwijt zou zijn -->
+            <!-- Maar die tijd had ik niet meer. Opzich niet ingewikkeld, dan zou ik de prijsstructuur in het object wat anders moeten opzetten -->
+            <!-- En dat ik dan op basis van de billingFrequency de juiste prijs selecteer. -->
             <ul>
                 <li>Betaaltermijn: {{ signUpFormData.insurance.billingFrequency }}</li>
                 <li>Totaalpremie: {{ convertNumToEuro(totalInsurancePrice) }}</li>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="mt-5">Verzekering</h2>
-        <div class="form-group" ref="insuranceInput">
+        <div class="form-group" ref="input-insurancePackage">
             <h3>Basisverzekering</h3>
             <p>
                 In Nederland is de basisverzekering verplicht.
@@ -30,6 +30,7 @@
                                 name="radio-insurance"
                                 :id="insurance.formId"
                                 class="radio__input custom-control-input"
+                                :class="{'is-invalid': $v.signUpFormData.insurancePackage.$error}"
                                 v-model="signUpFormData.insurancePackage"
                             />
                             <label
@@ -45,13 +46,22 @@
                             </label>
                         </div>
                     </div>
+                    <div
+                            class="input__feedback invalid-feedback mt-1"
+                            v-show="$v.signUpFormData.insurancePackage.$error"
+                            aria-live="polite"
+                    >
+                        <span>
+                            U hebt nog geen basisverzekering geselecteerd
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="form-input my-4">
                 <div class="input__group">
-                    <label class="input__title">
+                    <label class="input__title" ref="input-billingFrequency">
                         Kies je betaaltermijn
                     </label>
                     <select
@@ -69,14 +79,14 @@
             <h3>Eigen risico</h3>
             <div class="form-input my-4">
                 <div class="input__group">
-                    <label class="input__title">
+                    <label class="input__title" ref="input-ownRisk">
                         Kies de hoogste van het eigen risico
                     </label>
                     <!-- Het blokje laat ik staan maar ik vervang de input door een tekstvak in -->
                     <!-- dezelfde stijl, dan verchijnt er niet ineens iets 'nieuws' voor de gebruiker -->
                     <!-- Vervolgens koppel ik er een functie aan zodat de gebruiker naar de basisverzekering toe scrolt -->
                     <div class="input__select-risk-warning" v-show="signUpFormData.insurancePackage === ''" @click="scrollToInsurance">
-                        Kies eerst een basisverzekering.
+                        Kies eerst uw basisverzekering.
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-right-up"><polyline points="10 9 15 4 20 9"></polyline><path d="M4 20h7a4 4 0 0 0 4-4V4"></path></svg>
                     </div>
@@ -102,7 +112,7 @@
             </p>
             <div class="form-input my-4">
                 <div class="input__group">
-                    <label class="input__title">
+                    <label class="input__title" ref="input-optionalInsurance">
                         Kies uw aanvullende verzekering
                     </label>
                     <select
@@ -123,7 +133,7 @@
         <div class="form-group">
             <div class="form-input my-4">
                 <div class="input__group">
-                    <label class="input__title">
+                    <label class="input__title" ref="input-dentistInsurance">
                         Kies uw tandartsverzekering
                     </label>
                     <select
@@ -146,11 +156,16 @@
 
 <script>
     import globalMethods from '@/mixins/global_methods'
+    // Met vuelidate kan ik simpel en effectief formulieren valideren op client-niveau.
+    // Dit wordt gedaan om de gebruiksvriendelijkheid te verbeteren.
+    import { validationMixin } from 'vuelidate'
+    import { required } from 'vuelidate/lib/validators'
+    import scrollToError from '@/mixins/scrollToError'
 
     export default {
         name: "InsuranceData",
         // De globalMethods mixing biedt een convert functie voor nummers naar een nederlandse valuta string
-        mixins: [globalMethods],
+        mixins: [globalMethods, validationMixin, scrollToError],
         props: {
             iterativeData: Object,
         },
@@ -264,6 +279,19 @@
                 }
             }
         },
+        validations: {
+            signUpFormData: {
+                insurancePackage: {
+                    required
+                },
+                billingFrequency: {
+                    required
+                },
+                ownRisk: {
+                    required
+                }
+            }
+        },
         mounted() {
             // Met deze check controleer ik of de gebruiker hier terug kwam, en dus al data heeft. Anders behoud ik de standaardwaarden
             if (this.iterativeData.iterate === true) {
@@ -272,11 +300,32 @@
         },
         methods: {
             scrollToInsurance() {
-                let insurancePosition = this.$refs.insuranceInput.getBoundingClientRect().top + window.scrollY;
+                let insurancePosition = this.$refs['input-insurancePackage'].getBoundingClientRect().top + window.scrollY;
                 window.scrollTo({top: insurancePosition, left: 0, behavior: 'smooth'})
             },
             nextFormComponent() {
-                this.$emit('next-form', {key: 'insurance', value: this.signUpFormData});
+                // Eerst controlleer ik of alle velden errorvrij zijn, dan pas mag de gebruiker door
+                if (this.$v.signUpFormData.$invalid) {
+                    let listOfErrorElements = [];
+
+                    this.$v.signUpFormData.$touch();
+
+                    // Deze loop controlleert welke velden een error heeft. En zet deze elementen in een array
+                    for (const property in this.$v.signUpFormData) {
+                        if (
+                            typeof this.$v.signUpFormData[property] === 'object' &&
+                            this.$v.signUpFormData[property].$error
+                        ) {
+                            listOfErrorElements.push(property)
+                        }
+                    }
+
+                    // Als de code in dit blok zit, dan is er altijd een error. Dus ik kan gewoon het eerste element opgeven
+                    this.scrollToError(listOfErrorElements[0]);
+
+                } else {
+                    this.$emit('next-form', {key: 'insurance', value: this.signUpFormData});
+                }
             }
         }
     }
