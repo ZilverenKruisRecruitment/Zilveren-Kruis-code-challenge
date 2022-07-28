@@ -367,4 +367,29 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+    .action-btn {
+        height: 2rem;
+        border-radius: 2rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-family: "Montserrat",serif;
+        background-color: #0068bd;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        padding: 1rem 1.15rem;
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+        margin-bottom: 2rem;
+        transition: all 100ms;
+
+        &:hover {
+            background-color: #0084f0;
+        }
+    }
+</style>
