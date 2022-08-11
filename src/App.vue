@@ -489,6 +489,7 @@
                                     id="deductible"
                                     class="form-control"
                                     v-model="form.deductible"
+                                    v-bind:disabled="!form.insurance"
                                 >
                                     <option>
                                         € 385 - verplicht eigen risico
@@ -497,6 +498,11 @@
                                         € 885 - korting van € 22 per jaar
                                     </option>
                                 </select>
+                                <span
+                                    class="text-danger"
+                                    v-if="!form.insurance"
+                                    >Kies eerst een basisverzekering</span
+                                >
                             </div>
                         </div>
                     </div>
@@ -754,4 +760,9 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.text-danger {
+    color: red !important;
+}
+
+</style>
