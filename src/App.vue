@@ -249,13 +249,12 @@
                         <h3>Persoonlijke gegevens</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label for="first-name" class="input__title"
-                                    >Naam</label
-                                >
+                                <label for="first-name" class="input__title">Naam</label>
                                 <input
                                     id="first-name"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="form.firstName"
                                 />
                             </div>
                         </div>
@@ -268,6 +267,7 @@
                                     id="insertion"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="form.insertion"
                                 />
                             </div>
                         </div>
@@ -278,6 +278,7 @@
                                     id="last-name"
                                     class="input__field form-control"
                                     type="text"
+                                    v-model="form.lastName"
                                 />
                             </div>
                         </div>
@@ -293,6 +294,7 @@
                                             class="radio__input custom-control-input"
                                             type="radio"
                                             name="geslacht"
+                                            v-model="form.gender"
                                         />
                                         <label
                                             class="radio__label custom-control-label"
@@ -309,6 +311,7 @@
                                             class="radio__input custom-control-input"
                                             type="radio"
                                             name="geslacht"
+                                            v-model="form.gender"
                                         />
                                         <label
                                             class="radio__label custom-control-label"
@@ -329,6 +332,7 @@
                                     id="date-of-birth"
                                     class="input__field form-control"
                                     type="date"
+                                    v-model="form.dateOfBirth"
                                 />
                             </div>
                         </div>
@@ -339,6 +343,7 @@
                                 </label>
                                 <input
                                     id="bsn"
+                                    v-model="form.bsn"
                                 />
                             </div>
                             <div
@@ -378,6 +383,7 @@
                                             name="radio-insurance"
                                             id="radio-insurance-basis-budget"
                                             class="radio__input custom-control-input"
+                                            v-model="form.insurance"
                                         />
                                         <label
                                             for="radio-insurance-basis-budget"
@@ -405,6 +411,7 @@
                                             name="radio-insurance"
                                             id="radio-insurance-basis-zeker"
                                             class="radio__input custom-control-input"
+                                            v-model="form.insurance"
                                         />
                                         <label
                                             for="radio-insurance-basis-zeker"
@@ -429,6 +436,7 @@
                                             name="radio-insurance"
                                             id="radio-insurance-basis-exclusief-(restitutie)"
                                             class="radio__input custom-control-input"
+                                            v-model="form.insurance"
                                         />
                                         <label
                                             for="radio-insurance-basis-exclusief-(restitutie)"
@@ -455,6 +463,7 @@
                                 <select
                                     id="payment-term"
                                     class="form-control"
+                                    v-model="form.paymentTerm"
                                 >
                                     <option>per maand</option>
                                     <option>per kwartaal</option>
@@ -473,6 +482,7 @@
                                 <select
                                     id="deductible"
                                     class="form-control"
+                                    v-model="form.deductible"
                                 >
                                     <option>
                                         € 385 - verplicht eigen risico
@@ -500,6 +510,7 @@
                                 <select
                                     id="additional"
                                     class="form-control"
+                                    v-model="form.additional"
                                 >
                                     <option selected>
                                         Geen aanvullende verzekering
@@ -533,6 +544,7 @@
                                 <select
                                     id="dental-insurance"
                                     class="form-control"
+                                    v-model="form.dentalInsurance"
                                 >
                                     <option selected>
                                         Geen tandartsverzekering geselecteerd
@@ -548,6 +560,16 @@
                     <h2 class="mt-5">Controleren</h2>
                     <div class="form-group">
                         <h3>Gekozen pakket</h3>
+                        <p class="h3 font-weight-bold">
+                            {{ form.firstName }} {{ form.insertion }} {{ form.lastName }}
+                            <span v-if="form.dateOfBirth !== ''"
+                                >({{ form.dateOfBirth }})</span
+                            >
+                        </p>
+
+                        <div class="border-bottom">
+                            <strong>{{ form.insurance }}</strong>
+                        </div>
                     </div>
                     <div class="form-group">
                         <h3>Totaalpremie</h3>
@@ -696,7 +718,17 @@
 
 <script>
 export default {
-    name: 'App'
+    name: 'App',
+    data() {
+        return {
+            form: {
+                firstName: '',
+                insertion: '',
+                lastName: '',
+                dateOfBirth: ''
+            }
+        };
+    }
 };
 </script>
 
