@@ -343,11 +343,17 @@
                                 </label>
                                 <input
                                     id="bsn"
+                                    class="input__field form-control"
+                                    type="number"
+                                    placeholder="Add 9 numbers"
+                                    maxlength="9"
+                                    required
                                     v-model="form.bsn"
+                                    @input="bsnValidation($event)"
                                 />
                             </div>
                             <div
-                                class="input__feedback invalid-feedback mt-1"
+                                class="input__feedback invalid-feedback bsn-error d-none mt-1"
                                 aria-live="polite"
                             >
                                 <span
@@ -719,6 +725,22 @@
 <script>
 export default {
     name: 'App',
+    methods: {
+        bsnValidation(e) {
+            const errorMessage = document.querySelector('.bsn-error');
+            e.target.addEventListener('change', e => {
+                const bsnNumber = e.target.value;
+                const length = bsnNumber.toString().length;
+                if (length === 9) {
+                    errorMessage.classList.add('d-none');
+                    e.target.classList.remove('is-invalid');
+                } else {
+                    errorMessage.classList.remove('d-none');
+                    e.target.classList.add('is-invalid');
+                }
+            });
+        }
+    },
     data() {
         return {
             form: {
