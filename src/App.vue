@@ -222,11 +222,17 @@
                     <div class="form-group">
                         <h3>Reden van aanmelding</h3>
                         <div class="form-input my-4">
-                            <label id="aanmeldreden-label" class="input__title">
+                            <label
+                                for="reason-for-registration"
+                                class="input__title"
+                            >
                                 Wat is de reden van uw aanvraag?
                             </label>
                             <div class="input__group">
-                                <select class="form-control">
+                                <select
+                                    id="reason-for-registration"
+                                    class="form-control"
+                                >
                                     <option>
                                         Nieuwe werkgever met collectiviteit bij
                                         Zilveren Kruis
@@ -243,8 +249,11 @@
                         <h3>Persoonlijke gegevens</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">Naam</label>
+                                <label for="first-name" class="input__title"
+                                    >Naam</label
+                                >
                                 <input
+                                    id="first-name"
                                     class="input__field form-control"
                                     type="text"
                                 />
@@ -252,10 +261,11 @@
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="insertion" class="input__title">
                                     Tussenvoegsels
                                 </label>
                                 <input
+                                    id="insertion"
                                     class="input__field form-control"
                                     type="text"
                                 />
@@ -263,16 +273,17 @@
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">Achternaam</label>
+                                <label for="last-name" class="input__title">Achternaam</label>
                                 <input
+                                    id="last-name"
                                     class="input__field form-control"
                                     type="text"
                                 />
                             </div>
                         </div>
                         <div class="form-input my-4">
-                            <div class="input__group">
-                                <label class="input__title">Geslacht</label>
+                            <fieldset class="input__group">
+                                <legend class="input__title">Geslacht</legend>
                                 <div class="form-row">
                                     <div
                                         class="radio custom-radio radio__option"
@@ -307,14 +318,15 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="date-of-birth" class="input__title">
                                     Geboortedatum
                                 </label>
                                 <input
+                                    id="date-of-birth"
                                     class="input__field form-control"
                                     type="date"
                                 />
@@ -322,12 +334,11 @@
                         </div>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="bsn" class="input__title">
                                     Burgerservicenummer
                                 </label>
                                 <input
-                                    class="input__field form-control is-invalid"
-                                    type="text"
+                                    id="bsn"
                                 />
                             </div>
                             <div
@@ -352,10 +363,10 @@
                             geaccepteerd. De overheid bepaalt welke zorg hierin
                             zit en dit is dus bij elke verzekeraar hetzelfde.
                         </p>
-                        <div class="input__group">
-                            <label class="input__title">
+                        <fieldset class="input__group">
+                            <legend class="input__title">
                                 Kies uw basisverzekering
-                            </label>
+                            </legend>
                             <div class="form-row">
                                 <div class="radio__tile">
                                     <div
@@ -433,15 +444,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </fieldset>
                     </div>
                     <div class="form-group">
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="payment-term" class="input__title">
                                     Kies je betaaltermijn
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="payment-term"
+                                    class="form-control"
+                                >
                                     <option>per maand</option>
                                     <option>per kwartaal</option>
                                     <option selected>per jaar</option>
@@ -453,10 +467,13 @@
                         <h3>Eigen risico</h3>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="deductible" class="input__title">
                                     Kies de hoogste van het eigen risico
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="deductible"
+                                    class="form-control"
+                                >
                                     <option>
                                         € 385 - verplicht eigen risico
                                     </option>
@@ -477,10 +494,13 @@
                         </p>
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label for="additional" class="input__title">
                                     Kies uw aanvullende verzekering
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="additional"
+                                    class="form-control"
+                                >
                                     <option selected>
                                         Geen aanvullende verzekering
                                         geselecteerd
@@ -504,10 +524,16 @@
                     <div class="form-group">
                         <div class="form-input my-4">
                             <div class="input__group">
-                                <label class="input__title">
+                                <label
+                                    for="dental-insurance"
+                                    class="input__title"
+                                >
                                     Kies uw tandartsverzekering
                                 </label>
-                                <select class="form-control">
+                                <select
+                                    id="dental-insurance"
+                                    class="form-control"
+                                >
                                     <option selected>
                                         Geen tandartsverzekering geselecteerd
                                     </option>
