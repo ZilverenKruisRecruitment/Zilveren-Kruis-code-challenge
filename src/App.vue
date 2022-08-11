@@ -316,7 +316,7 @@
                                 </label>
                                 <input
                                     class="input__field form-control"
-                                    type="text"
+                                    type="date"
                                 />
                             </div>
                         </div>
