@@ -1,15 +1,28 @@
 <template>
     <div class="card card--filled-secondary h-auto infoCard">
         <h3 class="mb-2">Daarom Zilveren Kruis</h3>
-        <ul>
-            <li>Zorgverzekeraar van 3,4 miljoen Nederlanders</li>
-            <li>Beoordeeld met een 9,5 door onze klanten</li>
-            <li>Ruime vergoedingen, grote keuzevrijheid</li>
-            <li>Veel hanidge extra's bij je zorgverkering</li>
+        <ul class="list-unstyled">
             <li>
-                Je declaratie binnen 3 dagen betaald / betalen zoals je wilt
+                <i class="fas fa-check"></i> Zorgverzekeraar van 3,4 miljoen
+                Nederlanders
             </li>
-            <li>Top 3 duurzame zorgverkeraar</li>
+            <li>
+                <i class="fas fa-check"></i> Beoordeeld met een 9,5 door onze
+                klanten
+            </li>
+            <li>
+                <i class="fas fa-check"></i> Ruime vergoedingen, grote
+                keuzevrijheid
+            </li>
+            <li>
+                <i class="fas fa-check"></i> Veel handige extra's bij je
+                zorgverkering
+            </li>
+            <li>
+                <i class="fas fa-check"></i> Je declaratie binnen 3 dagen
+                betaald / betalen zoals je wilt
+            </li>
+            <li><i class="fas fa-check"></i> Top 3 duurzame zorgverkeraar</li>
         </ul>
     </div>
 </template>
@@ -25,6 +38,10 @@
     bottom: 0%;
     background: #ffffff;
     border: 2px solid #dcebf3;
+}
+.fa-check {
+    color: rgba(108, 163, 65, 1);
+    margin-right: 1%;
 }
 li {
     list-style: none;

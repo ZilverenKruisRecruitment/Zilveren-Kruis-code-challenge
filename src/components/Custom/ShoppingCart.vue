@@ -3,7 +3,10 @@
         <div class="card-body">
             <table class="table table-borderless">
                 <thead>
-                    <h3 class="mb-2">winkelmandje</h3>
+                    <h3 class="mb-2">
+                        <i class="fas fa-shopping-basket"></i>
+                        winkelmandje
+                    </h3>
                 </thead>
                 <tbody>
                     <tr>
@@ -26,15 +29,21 @@
                     </tr>
                 </tbody>
             </table>
-            <p>
-                <a href="#" class="btn-link">
-                    Geen tandartsverzekering geselecteerd
-                </a>
-            </p>
+            <a href="#" class="btn-link">
+                Geen tandartsverzekering geselecteerd
+            </a>
             <hr />
             <p>Totaal per maand, in 2022</p>
             <h2>€ 150,00</h2>
-            <button class="nextBtn">Ja ik wil dit pakket!</button>
+            <div class="d-flex justify-content-center">
+                <button class="nextBtn w-100">Ja ik wil dit pakket!</button>
+                <i class="fas fa-solid fa-circle-plus"></i>
+            </div>
+            <div class="row d-flex justify-content-center mt-3">
+                <a href="#" class="btn-link">
+                    <i class="fas fa-plus-circle"></i> Voeg een partner/kind toe
+                </a>
+            </div>
         </div>
     </div>
 </template>

@@ -56,6 +56,24 @@ export default {
         return {
             currentStep: 0,
             submitted: false,
+            formValue: {
+                information: {
+                    aanvraagReden: '',
+                    naam: '',
+                    tussenvoegsel: '',
+                    achternaam: '',
+                    geslacht: '',
+                    geboortedatum: '',
+                    bsn: ''
+                },
+                insurance: {
+                    basisverzekering: '',
+                    betaaltermijn: '',
+                    eigenRisico: '',
+                    aanvullendeVerzekering: '',
+                    tandartsVerzekering: ''
+                }
+            },
             steps: [
                 {
                     component: Information,

@@ -8,10 +8,15 @@
             </label>
             <div class="input__group">
                 <select class="form-control">
-                    <option>
+                    <option
+                        value="Nieuwe werkgever met collectiviteit bij Zilveren Kruis"
+                    >
                         Nieuwe werkgever met collectiviteit bij Zilveren Kruis
                     </option>
-                    <option selected>
+                    <option
+                        selected
+                        value="Overstappen per 1-1-2023 naar Zilveren Kruis"
+                    >
                         Overstappen per 1-1-2023 naar Zilveren Kruis
                     </option>
                 </select>
@@ -99,3 +104,9 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+export default {
+    name: 'InformationStep'
+};
+</script>

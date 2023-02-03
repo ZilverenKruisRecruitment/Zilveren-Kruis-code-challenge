@@ -6,14 +6,13 @@
                 <p class="mb-5">Twijfel je? Heb je een vraag?</p>
                 <div class="phonenumber mb-2">
                     <a href="tel:0900 040 03 09" class="btn-link">
-                        <span class="sr-only"> Telefoonnummer </span>
-                        0900 040 03 09
+                        0900 040 03 09 <i class="fas fa-info-circle"></i>
                     </a>
                 </div>
                 <small> Open op maandag t/m vrijdag van 08:00 tot 17:00 </small>
-                <p>
+                <div class="mt-5">
                     <a href="#" class="btn-link">Stel je vraag via Chat</a>
-                </p>
+                </div>
             </div>
         </div>
     </div>
