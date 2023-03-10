@@ -1,3 +1,7 @@
+# My Implementation:
+A few notes regarding my implementation of this form view:
+- I have opted to use the **Option API** over the **Composition API** for this simple form since this is not a complex full Vue application.
+
 # Zilveren Kruis code challenge
 
 Super tof dat je interesse hebt om bij Zilveren Kruis aan de slag te gaan! We werken elke dag met een grote groep van developers aan de website van Zilveren Kruis. Deze groep van developers willen we heel graag uitbreiden. Daarbij vinden we opleiding, werkervaring of achtergrond eigenlijk helemaal niet zo waardevol. Belangrijker is dat je talent hebt en de juiste motivatie. Daarom kun je bij ons ook solliciteren op de vacature Front-end Developer door mee te doen aan onze code challenge.
