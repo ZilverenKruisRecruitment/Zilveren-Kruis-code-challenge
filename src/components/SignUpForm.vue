@@ -101,10 +101,11 @@
                             <label class="input__title">
                                 Geboortedatum
                             </label>
-                            <input
+                            <!-- <input
                                 class="input__field form-control"
                                 type="text"
-                            />
+                            /> -->
+                            <VueDatePicker v-model="date"></VueDatePicker>
                         </div>
                     </div>
                     <div class="form-input my-4">
@@ -355,3 +356,11 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+const date = ref();
+</script>
