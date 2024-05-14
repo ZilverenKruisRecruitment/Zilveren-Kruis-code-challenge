@@ -12,7 +12,14 @@
                         <label id="aanmeldreden-label" class="input__title">Wat is de reden van uw aanvraag?</label>
                         <div class="input__group">
                             <select class="form-control" v-model="userInput.reason">
-                                <option v-for="option in formOptions.reasons" :key="option.value" :value="option.value" :disabled="option.disabled">{{ option.label }}</option>
+                                <option
+                                    v-for="option in formOptions.reasons"
+                                    :key="option.value"
+                                    :value="option.value"
+                                    :disabled="option.disabled"
+                                >
+                                    {{ option.label }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -95,7 +102,7 @@
                     <div class="form-input my-4">
                         <div class="input__group">
                             <label class="input__title">Geboortedatum</label>
-                            <VueDatePicker format="dd/MM/yyyy" :enable-time-picker="false" v-model="userInput.birthday"></VueDatePicker>
+                            <VueDatePicker format="dd/MM/yyyy" locale="nl" model-type="dd MMM. yyyy" :enable-time-picker="false" v-model="userInput.birthday"></VueDatePicker>
                         </div>
                     </div>
                     <div class="form-input my-4">
@@ -103,7 +110,7 @@
                             <label class="input__title">Burgerservicenummer</label>
                             <input
                                 class="input__field form-control"
-                                :class="!isValidBSN(userInput.bsn) && 'is-invalid'"
+                                :class="{ 'is-invalid' : !isValidBSN(userInput.bsn) }"
                                 type="text"
                                 v-model="userInput.bsn"
                             />
@@ -117,6 +124,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="divider"></div>
 
                 <h2 class="mt-5">Verzekering</h2>
                 <div class="form-group">
@@ -133,9 +142,11 @@
                             <div class="radio__tile" v-for="option in formOptions.insurances" :key="option.value">
                                 <div
                                     class="radio custom-radio radio__option"
-                                    :class="userInput.insurancePackage === option.value && 'radio__tile--choice'">
+                                    :class="{ 'radio__tile--choice': userInput.insurancePackage.value === option.value }"
+                                >
+                                    <div class="badge radio__tile-badge" v-if="option.mostSelected">Meest gekozen</div>
                                     <input
-                                        :value="option.value"
+                                        :value="option"
                                         type="radio"
                                         name="radio-insurance"
                                         :id="option.id"
@@ -147,64 +158,7 @@
                                         class="radio__label custom-control-label"
                                     >
                                         <p class="radio__description">{{ option.label }}</p>
-                                        <p class="radio__price">&euro; {{ formatPrice(option.price) }} per maand</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="radio__tile">
-                                <div class="radio custom-radio radio__option">
-                                    <input
-                                        value="Basis Budget"
-                                        type="radio"
-                                        name="radio-insurance"
-                                        id="radio-insurance-basis-budget"
-                                        class="radio__input custom-control-input"
-                                    />
-                                    <label
-                                        for="radio-insurance-basis-budget"
-                                        class="radio__label custom-control-label"
-                                    >
-                                        <p class="radio__description">Basis Budget</p>
-                                        <p class="radio__price">&euro; 1.393,26 per jaar</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="radio__tile radio__tile--choice">
-                                <div class="badge radio__tile-badge">Meest gekozen</div>
-                                <div class="radio custom-radio radio__option">
-                                    <input
-                                        value="Basis Zeker"
-                                        type="radio"
-                                        name="radio-insurance"
-                                        id="radio-insurance-basis-zeker"
-                                        class="radio__input custom-control-input"
-                                    />
-                                    <label
-                                        for="radio-insurance-basis-zeker"
-                                        class="radio__label custom-control-label"
-                                    >
-                                        <p class="radio__description">Basis Zeker</p>
-                                        <p class="radio__price">&euro; 1.483,54 per jaar</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="radio__tile">
-                                <div
-                                    class="radio custom-radio radio__option"
-                                >
-                                    <input
-                                        value="Basis Exclusief (Restitutie)"
-                                        type="radio"
-                                        name="radio-insurance"
-                                        id="radio-insurance-basis-exclusief-(restitutie)"
-                                        class="radio__input custom-control-input"
-                                    />
-                                    <label
-                                        for="radio-insurance-basis-exclusief-(restitutie)"
-                                        class="radio__label custom-control-label"
-                                    >
-                                        <p class="radio__description">Basis Exclusief (Restitutie)</p>
-                                        <p class="radio__price">&euro; 1.624,62 per jaar</p>
+                                        <p class="radio__price">&euro; {{ formatPrice(option.value) }} per maand</p>
                                     </label>
                                 </div>
                             </div>
@@ -214,30 +168,31 @@
                 <div class="form-group">
                     <div class="form-input my-4">
                         <div class="input__group">
-                            <label class="input__title">
-                                Kies je betaaltermijn
-                            </label>
-                            <select class="form-control">
-                                <option>per maand</option>
-                                <option>per kwartaal</option>
-                                <option selected>per jaar</option>
+                            <label class="input__title">Kies je betaaltermijn</label>
+                            <select class="form-control" v-model="userInput.paymentTerm">
+                                <option
+                                    v-for="option in formOptions.paymentTerms"
+                                    :key="option.value"
+                                    :value="option.value"
+                                >
+                                    {{ option.label }}
+                                </option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" v-if="userInput.insurancePackage.value">
                     <h3>Eigen risico</h3>
                     <div class="form-input my-4">
                         <div class="input__group">
-                            <label class="input__title">
-                                Kies de hoogste van het eigen risico
-                            </label>
-                            <select class="form-control">
-                                <option>
-                                    € 385 - verplicht eigen risico
-                                </option>
-                                <option>
-                                    € 885 - korting van € 22 per jaar
+                            <label class="input__title">Kies de hoogste van het eigen risico</label>
+                            <select class="form-control" v-model="userInput.ownRisk">
+                                <option
+                                    v-for="option in formOptions.ownRisks"
+                                    :key="option.value"
+                                    :value="option.value"
+                                >
+                                    {{ option.label }}
                                 </option>
                             </select>
                         </div>
@@ -253,25 +208,17 @@
                     </p>
                     <div class="form-input my-4">
                         <div class="input__group">
-                            <label class="input__title">
-                                Kies uw aanvullende verzekering
-                            </label>
-                            <select class="form-control">
-                                <option selected>
-                                    Geen aanvullende verzekering
-                                    geselecteerd
-                                </option>
-                                <option>
-                                    Aanvullend 1 - € 21,38 per jaar
-                                </option>
-                                <option>
-                                    Aanvullend 2 - € 85,06 per jaar
-                                </option>
-                                <option>
-                                    Aanvullend 3 - € 198,63 per jaar
-                                </option>
-                                <option>
-                                    Aanvullend 4 - € 359,73 per jaar
+                            <label class="input__title">Kies uw aanvullende verzekering</label>
+                            <select
+                                class="form-control"
+                                v-model="userInput.additionalInsurance"
+                            >
+                                <option
+                                    v-for="option in formOptions.additionalInsurances"
+                                    :key="option.value"
+                                    :value="option"
+                                >
+                                  {{ option.label }}
                                 </option>
                             </select>
                         </div>
@@ -280,27 +227,63 @@
                 <div class="form-group">
                     <div class="form-input my-4">
                         <div class="input__group">
-                            <label class="input__title">
-                                Kies uw tandartsverzekering
-                            </label>
-                            <select class="form-control">
-                                <option selected>
-                                    Geen tandartsverzekering geselecteerd
+                            <label class="input__title">Kies uw tandartsverzekering</label>
+                            <select class="form-control" v-model="userInput.dentalInsurance">
+                                <option
+                                    v-for="option in formOptions.dentalInsurances"
+                                    :key="option.value"
+                                    :value="option"
+                                >
+                                  {{ option.label }}
                                 </option>
-                                <option>Tand 1 - € 80,28 per jaar</option>
-                                <option>Tand 2 - € 221,65 per jaar</option>
-                                <option>Tand 3 - € 449,36 per jaar</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <h2 class="mt-5">Controleren</h2>
+                <div class="divider"></div>
+
+                <h2 class="mt-5">Controle</h2>
                 <div class="form-group">
                     <h3>Gekozen pakket</h3>
+                    <h3 class="h3">
+                        <span v-if="fullName">{{ fullName }}</span> <span v-if="birthDay">{{ birthDay }}</span>
+                    </h3>
+                    <div v-if="userInput.insurancePackage.value">
+                        <p class="input__title">Basisverzekering</p>
+                        <div class="d-flex justify-content-between">
+                           <p>{{ userInput.insurancePackage.label }}</p>
+                           <p>&euro; {{ formatPrice(formatPriceMonthToYear(userInput.insurancePackage.value, userInput.paymentTerm)) }}</p>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="mt-3" v-if="userInput.insurancePackage.value">
+                        <p class="input__title">Eigen risico</p>
+                        <div class="d-flex justify-content-between">
+                           <p>&euro; {{ formatPrice(userInput.ownRisk) }}</p>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="mt-3" v-if="userInput.additionalInsurance.value">
+                        <p class="input__title">Aanvullende verzekering</p>
+                        <div class="d-flex justify-content-between">
+                           <p>{{ userInput.additionalInsurance.label }}</p>
+                           <p>&euro; {{ formatPrice(formatPriceYearToMonth(userInput.additionalInsurance.value, userInput.paymentTerm)) }}</p>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="mt-3" v-if="userInput.dentalInsurance.value">
+                        <p class="input__title">Tandartsverzekering</p>
+                        <div class="d-flex justify-content-between">
+                           <p>{{ userInput.dentalInsurance.label }}</p>
+                           <p>&euro; {{ formatPrice(formatPriceYearToMonth(userInput.dentalInsurance.value, userInput.paymentTerm)) }}</p>
+                        </div>
+                        <div class="divider"></div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <h3>Totaalpremie</h3>
+                <div class="form-group card card--filled-secondary h-auto mt-5 px-3 py-4" v-if="pricePerTerm">
+                    <h4>Totaalpremie <u>{{ userInput.paymentTerm.toLowerCase() }}</u>, in {{ new Date().getFullYear() }}</h4>
+                    <p class="total-price">&euro; {{ pricePerTerm }}</p>
                 </div>
                 <div class="form-group">
                     <h3>Adres en contactgegevens</h3>
@@ -346,7 +329,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { computed, ref } from 'vue';
     import VueDatePicker from '@vuepic/vue-datepicker';
     import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -370,24 +353,85 @@
             {
                 id: 'radio-insurance-basis-budget',
                 label: 'Basis Budget',
-                price: 125,
-                value: 'Basis Budget',
+                value: 125
             },
             {
                 id: 'radio-insurance-basis-zeker',
                 label: 'Basis Zeker',
-                price: 130,
-                value: 'Basis Zeker',
+                value: 130,
+                mostSelected: true
             },
             {
                 id: 'radio-insurance-basis-exclusief-(restitutie)',
                 label: 'Basis Exclusief (Restitutie)',
-                price: 150,
-                value: 'Basis Exclusief (Restitutie)',
+                value: 150
+            },
+        ],
+        paymentTerms: [
+            {
+                label: 'Per maand',
+                value: 'Per maand'
+            },
+            {
+                label: 'Per kwartaal',
+                value: 'Per kwartaal'
+            },
+            {
+                label: 'Per jaar',
+                value: 'Per jaar'
+            }
+        ],
+        ownRisks: [
+            {
+                label: '€ 385 - verplicht eigen risico',
+                value: 385
+            },
+            {
+                label: '€ 885 - korting van € 22 per jaar',
+                value: 885
+            }
+        ],
+        additionalInsurances: [
+            {
+                label: 'Geen aanvullende verzekering geselecteerd',
+                value: ''
+            },
+            {
+                label: 'Aanvullend 1 - € 21,38 per jaar',
+                value: 21.38
+            },
+            {
+                label: 'Aanvullend 2 - € 85,06 per jaar',
+                value: 85.06
+            },
+            {
+                label: 'Aanvullend 3 - € 198,63 per jaar',
+                value: 198.63
+            },
+            {
+                label: 'Aanvullend 4 - € 359,73 per jaar',
+                value: 359.73
+            }
+        ],
+        dentalInsurances: [
+            {
+                label: 'Geen tandartsverzekering geselecteerd',
+                value: ''
+            },
+            {
+                label: 'Tand 1 - € 80,28 per jaar',
+                value: 80.28
+            },
+            {
+                label: 'Tand 2 - € 221,65 per jaar',
+                value: 221.65
+            },
+            {
+                label: 'Tand 3 - € 449,36 per jaar',
+                value: 449.36
             },
         ]
-
-    }
+    };
 
     const userInput = ref({
         reason: '',
@@ -397,11 +441,19 @@
         gender: '',
         birthday: '',
         bsn: '',
-        insurancePackage: 'Basis Zeker'
+        insurancePackage: {},
+        paymentTerm: 'Per maand',
+        ownRisk: 385,
+        additionalInsurance: {
+            label: 'Geen aanvullende verzekering geselecteerd',
+            value: '',
+        },
+        dentalInsurance: {
+            label: 'Geen tandartsverzekering geselecteerd',
+            value: '',
+        },
     });
 
-    console.log('hello script setup')
-    console.log(userInput.value);
 
     //src: https://github.com/willemverbuyst/bsn-js/blob/main/src/validator.ts
     const isValidBSN = (bsn) => {
@@ -411,31 +463,109 @@
         const lastNumber = numbers[numbers.length - 1]
 
         if (typeof lastNumber === 'number' && !numbers.includes(NaN)) {
-            return (
-                (numbers
-                    .slice(0, -1)
-                    .reduce((a, b, i, arr) => b * (arr.length + 1 - i) + a, 0) -
-                    lastNumber) %
-                    11 ===
-                0
-            )
+            return ((numbers.slice(0, -1).reduce((a, b, i, arr) => b * (arr.length + 1 - i) + a, 0) - lastNumber) % 11 === 0)
         }
 
         return false
-    }
+    };
 
     //src: ChatGPT
     const formatPrice = price =>  {
-    // Convert price to a string and split it into integer and decimal parts
-    let [integerPart, decimalPart] = price.toFixed(2).toString().split(".");
+        // Convert price to a string and split it into integer and decimal parts
+        let [integerPart, decimalPart] = price.toFixed(2).toString().split(".");
 
-    // Add comma for thousands separator
-    integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        // Add comma for thousands separator
+        integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    // Concatenate integer and decimal parts with comma
-    return integerPart + "," + decimalPart;
-}
+        // Concatenate integer and decimal parts with comma
+        return integerPart + "," + decimalPart;
+    };
 
-// Example usage
-console.log(formatPrice(10000025.89)); // Output: 1.250,00
+    // To show correct price for the insurance package when switching to quarterly and yearly
+    const formatPriceMonthToYear = (price, term) => {
+        if (!price && !term) return;
+        let pricePerTerm = 0;
+
+        switch (term) {
+            case 'Per maand':
+                pricePerTerm = Number(price);
+            break;
+            case 'Per kwartaal':
+                pricePerTerm = Number(price) * 3;
+            break;
+            case 'Per jaar':
+                pricePerTerm = Number(price) * 12;
+            break;
+        }
+
+        return Number(pricePerTerm.toFixed(2));
+    }
+
+    // To show correct price for prices that are yearly based such as additional insurance and dental. Recalculating for monly and quarterly
+    const formatPriceYearToMonth = (price, term) => {
+        if (!price && !term) return;
+        let pricePerTerm = 0;
+        let pricePerMonth = Number((price / 12).toFixed(2));
+        switch (term) {
+            case 'Per maand':
+                pricePerTerm = pricePerMonth;
+            break;
+            case 'Per kwartaal':
+                pricePerTerm = pricePerMonth * 3;
+            break;
+            case 'Per jaar':
+                pricePerTerm = price;
+            break;
+        }
+
+        return Number(pricePerTerm.toFixed(2));
+    }
+
+    // Full name
+    const fullName = computed(() => `${ userInput.value.firstName } ${ userInput.value.surName } ${ userInput.value.lastName }`);
+
+    // Birthday
+    const birthDay = computed(() => {
+        if (!userInput.value.birthday) return;
+        return `(${ userInput.value.birthday })`;
+    });
+
+    //Price based on terms
+    const pricePerTerm = computed(() => {
+        let finalPrice = 0;
+        // Additional insurance and dental are displayed per year. Recalculate these per month and quarter and rerender the final price.
+        let basicInsurance = 0;
+        let additionalInsurancePricePerMonth = 0;
+        let dentalPricePerMonth = 0;
+
+        if (userInput.value.insurancePackage.value) basicInsurance = userInput.value.insurancePackage.value;
+        if (userInput.value.additionalInsurance.value) additionalInsurancePricePerMonth = Number((userInput.value.additionalInsurance.value / 12).toFixed(2));
+        if (userInput.value.dentalInsurance.value) dentalPricePerMonth = Number((userInput.value.dentalInsurance.value / 12).toFixed(2));
+
+
+        switch (userInput.value.paymentTerm) {
+            case 'Per maand':
+                finalPrice = basicInsurance + additionalInsurancePricePerMonth + dentalPricePerMonth;
+            break;
+            case 'Per kwartaal':
+                finalPrice = basicInsurance * 3 + additionalInsurancePricePerMonth * 3 + dentalPricePerMonth * 3;
+            break;
+            case 'Per jaar':
+                finalPrice = basicInsurance * 12 + Number(userInput.value.additionalInsurance.value) + Number(userInput.value.dentalInsurance.value)
+            break;
+        }
+
+        return finalPrice > 0 ? formatPrice(finalPrice) : null
+    });
 </script>
+
+<style scoped>
+    .divider {
+        border-top: 2px solid;
+        border-color: #dcebf3;
+    }
+
+    .total-price {
+        font-size: 1.75rem;
+    }
+</style>
