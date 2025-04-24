@@ -1,14 +1,16 @@
 {
-    "files": [],
-    "references": [
-        {
-            "path": "./tsconfig.config.json"
-        },
-        {
-            "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.vitest.json"
-        }
-    ]
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom", "dom.iterable"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "noEmit": true,
+        "types": ["node", "vite/client", "vitest/globals"],
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "esnext"
+    },
+    "include": ["src/**/*.ts", "src/**/*.vue"],
+    "exclude": ["node_modules", "dist", "public", "coverage"]
 }

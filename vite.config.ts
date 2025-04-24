@@ -1,15 +1,18 @@
-import { fileURLToPath, URL } from 'node:url';
-
-import { defineConfig } from 'vite';
+/// <reference types="vitest" />
 import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import { defineConfig } from 'vite';
+import { coverageConfigDefaults } from 'vitest/config';
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-    plugins: [vue(), vueJsx()],
-    resolve: {
-        alias: {
-            '@': fileURLToPath(new URL('./src', import.meta.url))
+    plugins: [vue()],
+    test: {
+        globals: true,
+        environment: 'happy-dom',
+        coverage: {
+            enabled: true,
+            include: ['src/**'],
+            exclude: ['src/*.*', ...coverageConfigDefaults.exclude]
         }
     }
 });
