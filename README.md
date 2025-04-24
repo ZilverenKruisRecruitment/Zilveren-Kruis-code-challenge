@@ -88,7 +88,7 @@ Bouw het voorbeeldformulier (zie `src/App.vue` voor de huidige html) verder af. 
     - BSN validatie: Is de ingevoerde waarde incorrect? Toon dan de volgende foutmelding (bij een `on-blur` van het veld):
         - "Helaas is het ingevoerde burgerservicenummer niet geldig. Probeer het opnieuw."
 - Splits de functionaliteiten op in logische Vue componenten.
-- Schrijf voor elk Vue component en/of Javascript functie die je hebt gescrheven een unit test met [Vitest](https://vitest.dev/). Hiermee test jij of je code voldoeet aan de vooraf gestelde eisen.
+- Maak voor elk Vue component en/of Javascript functie die je hebt gescrheven een unit test met [Vitest](https://vitest.dev/). Hiermee test je of jouw code voldoet aan de vooraf gestelde eisen.
 - Gebruik voor het uitwerken van het formulier TypeScript. TypeScript is al voor je ingericht.
 - Controleer voordat je commit of je code voldoet aan de linting regels van ESLint en Stylelint. Je kunt de volgende commmando's uitvoeren hiervoor:
     - ESLint: `npm run eslint`.
