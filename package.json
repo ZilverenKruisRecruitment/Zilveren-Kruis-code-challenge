@@ -9,7 +9,7 @@
         "preview": "vite preview",
         "test": "vitest",
         "eslint": "eslint **/*.{js,ts,vue}",
-        "stylelint": "stylelint **/*.{scss,vue}"
+        "stylelint": "stylelint **/*.{css,scss,vue}"
     },
     "dependencies": {
         "pinia": "^3.0.2",
