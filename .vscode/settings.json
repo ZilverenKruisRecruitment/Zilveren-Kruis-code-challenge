@@ -1,15 +1,21 @@
-{​​
-    "eslint.validate": [
-        "typescript",
-        "typescriptreact",
-        "javascript",
-        "javascriptreact",
-        "vue"
-    ],
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "never",
+        "source.fixAll": "never",
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.tslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "stylelint.validate": ["css", "scss", "vue"],
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
-    "vetur.format.enable": false,
+    "html.format.enable": false,
     "css.validate": false,
     "less.validate": false,
-    "scss.validate": false
+    "scss.validate": false,
+    "task.autoDetect": "off"
 }
